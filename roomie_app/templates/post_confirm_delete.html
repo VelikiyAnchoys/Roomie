@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="auth">
+    <div class="container">
+        <h2 class="title">Удалить пост</h2>
+        <h1>Вы уверены, что хотите удалить пост "{{ add.title }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="btn-success">Удалить</button>
+        <a href="{% url 'ads' %}">Отмена</a>
+    </form>
+    </div>
+</section>
+{% endblock %}

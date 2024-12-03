@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Избранное{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+   
+<section class="chat-list">
+    <div class="conteiner">
+    <h2>Избранное</h2>
+</div>
+
+{% for add in adds %}
+<div class="chat-item">
+    <img src="{{ add.foto.url }}" alt="" class="avatar">
+    <h3 class="chat-name">{{ add.title }}</h3>
+</div>
+{% endfor %}
+</div>
+</section>
+
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

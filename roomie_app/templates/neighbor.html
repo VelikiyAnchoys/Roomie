@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}сожители{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<section class="room">
+    <div class="container">
+        <h2>Сожители</h2>
+</div>
+{% for roommate in roommates %}
+          <div class="chat-item">
+            <img src="{{ roommate.imo.url }}" alt="" class="avatar">
+            <h3 class="chat-name">{{ roommate.name }}, {{ roommate.age }},</h3>
+            <h3 class="chat-name">{{ roommate.city }}</h3>
+            <a href="{% url 'neighbor_detail_page' pk=roommate.pk %}" class="write">Подробнее</a>
+          </div>
+      
+{% endfor %}      
+    </div>
+  </section>
+
+
+  {% else %}
+  <section class="access">
+      <div class="container">
+          <h1 class="title">Вы анонимный пользователь</h1>
+          <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+          <div class="access-action">
+              <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+              <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+          </div>
+      </div>
+  </section>
+  {% endif %}      
+{% endblock %}

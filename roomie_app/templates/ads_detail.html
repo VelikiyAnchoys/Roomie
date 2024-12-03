@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<section class="image-placeholder">
+    <div class="content">
+        <img src="{{ adds.foto.url }}" alt="" class="imoa">
+        <h1 class="price">{{ adds.title }}</h1>
+        <p class="description"><strong>Стоимость аренды: </strong>{{ adds.prace }}/месяц</p>
+        <p class="details">{{ adds.description }}</p>
+        <p class="details"><strong>Парковка:  </strong>{{ adds.parking}}</p>  
+        <p> <strong>Дата публикации:  </strong>{{ adds.time }}</p>
+        <button class="love">Добавить в избранное</button>
+        <div class="buttons">
+            <button class="write">Позвонить</button>
+            <button class="write">Написать</button>
+        </div>
+        {% if adds.author == user %}
+        <a href="{% url 'post_delete' adds.id %}" style="margin-top: 20px;
+        background-color: var(--ser);
+        color: var(--black);
+        width: 30%;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px;">Удалить</a>
+        {% endif %}
+    </div>
+</section>   
+   
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

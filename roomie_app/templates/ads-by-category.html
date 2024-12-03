@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+    <section class="cards">
+        <div class="container">
+            <h2 title>{{ categories.name }}</h2>
+        </div>
+      {% for add in adds %}
+      <div class="card">
+        <div class="card-info">
+          <img src="{{ add.foto.url }}" alt="" class="imoa">
+            <h3>{{ add.title }}</h3>
+            <p>{{ add.price }}</p>
+            <p>{{ add.discription }}</p>
+            <p> <strong>Дата публикации:  </strong>{{ add.time }}</p>
+            <button class="write">
+              <a href="{% url 'ads_detail_page' pk=add.pk %}">Обзор</a>
+            </button>
+        </div>
+        </div>
+      {% endfor %}
+      </div>
+    </section>
+
+    {% else %}
+    <section class="access">
+        <div class="container">
+            <h1 class="title">Вы анонимный пользователь</h1>
+            <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+            <div class="access-action">
+                <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+                <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+            </div>
+        </div>
+    </section>
+    {% endif %}        
+{% endblock %}
